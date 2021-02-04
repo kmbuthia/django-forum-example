@@ -1,0 +1,16 @@
+body {
+    background: url(../../images/bg.png);
+}
+
+.logo {
+    font-family: 'Potta One', cursive;
+}
+
+.logo a {
+    color: rgba(0,0,0,.9);
+}
+
+.logo a:hover,
+.logo a:active {
+    text-decoration: none;
+}
