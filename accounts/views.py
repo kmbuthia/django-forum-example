@@ -14,10 +14,10 @@ def signup(request):
             # Account creation disabled. Show popup then redirect back to home page.
             # To create accounts for others, you could enable the admin area and create
             # them from there.
-            # return redirect(reverse('home') + '?signup=disabled')
-            user = form.save()
-            auth_login(request, user)
-            return redirect('home')
+            return redirect(reverse('home') + '?signup=disabled')
+            # user = form.save()
+            # auth_login(request, user)
+            # return redirect('home')
     else :
         form = SignupForm()
     return render(request, 'signup.html', { 'form': form })
