@@ -10,11 +10,10 @@ class InitDataCron(CronJobBase):
 
     def do(self):
         # Clear users
-        users = User.objects.filter(is_staff=False)
-        print(users)
+        User.objects.filter(is_staff=False)
 
         admin_users = User.objects.filter(is_staff=True)
-        print(admin_users[0])
+        # print(admin_users[0])
 
         # Clear posts, topics and boards
         Post.objects.all().delete()
