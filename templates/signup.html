@@ -8,9 +8,19 @@
       <div class="card">
         <div class="card-body">
           <h3 class="card-title">Sign up</h3>
+          {% if captcha is not None and captcha == 'failed' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Captcha error!</strong> Captcha verification failed. Please try again
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
           <form method="post" novalidate>
             {% csrf_token %}
             {% include 'includes/form.html' %}
+            <div class="g-recaptcha" data-sitekey="6Lc-u00aAAAAACp1KSuoxLhUW7KOg5q-XAc3Sw4k"></div>
+            <br />
             <button type="submit" class="btn btn-primary btn-block">Create an account</button>
           </form>
         </div>
@@ -21,3 +31,7 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block javascript %}
+  <script src="https://www.google.com/recaptcha/api.js?render=onload" async defer></script>
+{% endblock %}

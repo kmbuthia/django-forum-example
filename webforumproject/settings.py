@@ -29,6 +29,10 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
+# Recaptcha settings
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
+NOCAPTCHA = True
 
 # Application definition
 
@@ -42,9 +46,16 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     # Installed apps
     'widget_tweaks',
+    'captcha_admin',
+    'captcha',
+    'django_cron',
     # Custom apps
     'boards',
     'accounts',
+]
+
+CRON_CLASSES = [
+    'boards.cronjobs.InitDataCron'
 ]
 
 MIDDLEWARE = [
@@ -140,4 +151,4 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
