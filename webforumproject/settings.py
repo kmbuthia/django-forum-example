@@ -48,14 +48,14 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'captcha_admin',
     'captcha',
-    'django_cron',
+    'django_crontab',
     # Custom apps
     'boards',
     'accounts',
 ]
 
-CRON_CLASSES = [
-    'boards.cronjobs.InitDataCron'
+CRONJOBS = [
+    ('*/30 * * * *', 'boards.cronjobs.init_data_cron', '>> {}'.format(os.path.join(BASE_DIR, 'logs/cronjobs.log')))
 ]
 
 MIDDLEWARE = [

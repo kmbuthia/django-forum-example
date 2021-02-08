@@ -28,6 +28,6 @@ have a local version of postgres installed with a database called
 7. Run the migrations: `python manage.py migrate`
 8. Run the app: `python manage.py runserver`
 
-This project also makes use of `django_cron` for running a cron script that continuously clears data to prevent spam
-entries. To get that running you can run the command `python manage.py migrate django_cron` then `python manage.py runcrons`.
-You can learn more about `django_cron` commands from the docs: https://django-cron.readthedocs.io/en/latest/installation.html
+This project also makes use of `django_crontab` for running a cron script that continuously clears data to prevent spam
+entries. To get that running you can run the command `python manage.py crontab add`.
+You can learn more about `django_crontab` commands from the docs: https://pypi.org/project/django-crontab/

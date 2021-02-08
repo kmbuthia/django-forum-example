@@ -1,16 +1,11 @@
-from django_cron import CronJobBase, Schedule
 from django.contrib.auth.models import User
 from boards.models import Board, Topic, Post
 from django.utils import timezone
 
-class InitDataCron(CronJobBase):
-    RUN_EVERY_MINS = 30 # Every 30min
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
-    code = 'webforumproject.boards.init_data_cron'
-
-    def do(self):
+def init_data_cron():
+    try:
         # Clear users
-        User.objects.filter(is_staff=False)
+        User.objects.filter(is_staff=False).delete()
 
         admin_users = User.objects.filter(is_staff=True)
         # print(admin_users[0])
@@ -40,5 +35,12 @@ class InitDataCron(CronJobBase):
             for i in range(51):
                 Post.objects.create(message = 'Test message {}'.format(i), topic=topic,
                     updated_at=timezone.now(), created_by=admin_users[0])
+        
+        print('init_data_cron ran successfully!')
+    except Exception as err:
+        print(err)
+        print('\n\n')
+        print(err.with_traceback())
+
 
 
